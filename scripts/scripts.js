@@ -172,8 +172,9 @@ export function decorateMain(main) {
   if (document.contains(main)) initPageSchemas();
 }
 
-async function loadTemplate(main, template) {
+async function loadTemplate(main) {
   try {
+    const template = getMetadata('template');
     if (template) {
       const mod = await import(`../templates/${template}/${template}.js`);
       loadCSS(`${window.hlx.codeBasePath}/templates/${template}/${template}.css`);
@@ -182,6 +183,7 @@ async function loadTemplate(main, template) {
       }
     }
   } catch (error) {
+     
     console.error('template loading failed', error);
   }
 }
@@ -221,7 +223,6 @@ async function loadLazy(doc) {
   loadHeader(headerEl);
   const templateName = getMetadata('template');
   if (templateName) {
-    document.body.classList.add(templateName);
     await loadTemplate(doc, templateName);
   }
 

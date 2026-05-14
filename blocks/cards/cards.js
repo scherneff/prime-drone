@@ -165,10 +165,6 @@ function decorateDefault(block) {
       }
     }
 
-    const article = createTag('article');
-    while (li.firstChild) article.append(li.firstChild);
-    li.append(article);
-
     ul.append(li);
   });
 
