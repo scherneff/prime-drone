@@ -1,19 +1,34 @@
 {
   "definitions": [
     {
-      "title": "Hero",
+      "title": "Hero (Image)",
       "id": "hero",
-      "model": "hero",
+      "model": "hero-image",
       "plugins": {
         "da": {
           "name": "hero",
-          "rows": 3,
+          "rows": 2,
           "columns": 1,
           "fields": [
-            { "name": "videoUrl", "selector": "div:nth-child(1)>div" },
-            { "name": "image", "selector": "div:nth-child(2)>div>picture>img[src]" },
-            { "name": "imageAlt", "selector": "div:nth-child(2)>div>picture>img[alt]" },
-            { "name": "heading", "selector": "div:nth-child(3)>div>h1" }
+            { "name": "image", "selector": "div:nth-child(1)>div>picture>img[src]" },
+            { "name": "imageAlt", "selector": "div:nth-child(1)>div>picture>img[alt]" },
+            { "name": "heading", "selector": "div:nth-child(2)>div>h1" }
+          ]
+        }
+      }
+    },
+    {
+      "title": "Hero (Video)",
+      "id": "hero-video",
+      "model": "hero-video",
+      "plugins": {
+        "da": {
+          "name": "hero",
+          "rows": 2,
+          "columns": 1,
+          "fields": [
+            { "name": "videoUrl", "selector": "div:nth-child(1)>div>a[href]" },
+            { "name": "heading", "selector": "div:nth-child(2)>div>h1" }
           ]
         }
       }
@@ -21,22 +36,14 @@
   ],
   "models": [
     {
-      "id": "hero",
+      "id": "hero-image",
       "fields": [
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "videoUrl",
-          "label": "Video URL",
-          "description": "MP4 video URL for the hero background. Leave empty to use an image instead."
-        },
         {
           "component": "reference",
           "valueType": "string",
           "name": "image",
           "label": "Background Image",
-          "multi": false,
-          "description": "Background image. Used when Video URL is empty."
+          "multi": false
         },
         {
           "component": "text",
@@ -44,6 +51,24 @@
           "name": "imageAlt",
           "label": "Image Alt Text",
           "value": ""
+        },
+        {
+          "component": "text",
+          "name": "heading",
+          "label": "Heading",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "id": "hero-video",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "videoUrl",
+          "label": "Video URL",
+          "description": "Direct URL to an MP4 video file"
         },
         {
           "component": "text",

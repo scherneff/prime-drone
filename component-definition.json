@@ -211,30 +211,48 @@
           }
         },
         {
-          "title": "Hero",
+          "title": "Hero (Image)",
           "id": "hero",
-          "model": "hero",
+          "model": "hero-image",
           "plugins": {
             "da": {
               "name": "hero",
-              "rows": 3,
+              "rows": 2,
+              "columns": 1,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1)>div>picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1)>div>picture>img[alt]"
+                },
+                {
+                  "name": "heading",
+                  "selector": "div:nth-child(2)>div>h1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Hero (Video)",
+          "id": "hero-video",
+          "model": "hero-video",
+          "plugins": {
+            "da": {
+              "name": "hero",
+              "rows": 2,
               "columns": 1,
               "fields": [
                 {
                   "name": "videoUrl",
-                  "selector": "div:nth-child(1)>div"
-                },
-                {
-                  "name": "image",
-                  "selector": "div:nth-child(2)>div>picture>img[src]"
-                },
-                {
-                  "name": "imageAlt",
-                  "selector": "div:nth-child(2)>div>picture>img[alt]"
+                  "selector": "div:nth-child(1)>div>a[href]"
                 },
                 {
                   "name": "heading",
-                  "selector": "div:nth-child(3)>div>h1"
+                  "selector": "div:nth-child(2)>div>h1"
                 }
               ]
             }

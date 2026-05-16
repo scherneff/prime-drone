@@ -1,19 +1,14 @@
 /** @param {Element} block The hero block element */
 export default function decorate(block) {
   const MP4_RE = /https?:\/\/\S+\.mp4\b/i;
-  const rows = [...block.querySelectorAll(':scope > div')];
 
-  // Block structure (3 rows):
-  //   Row 1 (videoRow)  — MP4 URL as text or link
-  //   Row 2 (imageRow)  — background image (picture element)
-  //   Row 3 (contentRow)— heading, tagline, body, CTA
-  const [videoRow, imageRow, contentRow] = rows;
-
-  // --- Row 1: Video URL ---
-  const videoAnchor = videoRow?.querySelector('a');
-  const videoText = videoRow?.textContent?.trim();
-  const videoSrc = (videoAnchor && MP4_RE.test(videoAnchor.href) ? videoAnchor.href : null)
-    || (videoText && MP4_RE.test(videoText) ? videoText.match(MP4_RE)[0] : null);
+  // --- Detect background from first row ---
+  // Hero (Image): row 1 = picture, row 2 = content
+  // Hero (Video): row 1 = MP4 link or text URL, row 2 = content
+  const firstRow = block.querySelector(':scope > div');
+  const videoAnchor = firstRow && [...firstRow.querySelectorAll('a')].find((a) => MP4_RE.test(a.href));
+  const videoTextEl = !videoAnchor && firstRow && [...firstRow.querySelectorAll('div, p')].find((el) => MP4_RE.test(el.textContent?.trim()));
+  const videoSrc = videoAnchor?.href || videoTextEl?.textContent?.trim().match(MP4_RE)?.[0];
 
   if (videoSrc) {
     const video = document.createElement('video');
@@ -25,39 +20,30 @@ export default function decorate(block) {
     video.setAttribute('disablepictureinpicture', '');
     video.append(Object.assign(document.createElement('source'), { src: videoSrc, type: 'video/mp4' }));
 
-    videoRow.innerHTML = '';
-    videoRow.classList.add('hero-video-wrap');
-    videoRow.append(video);
+    firstRow.innerHTML = '';
+    firstRow.classList.add('hero-video-wrap');
+    firstRow.append(video);
     block.classList.add('has-video');
-
-    // Hide unused image row
-    if (imageRow) imageRow.hidden = true;
   } else {
-    // Hide empty video row
-    if (videoRow) videoRow.hidden = true;
-
-    // --- Row 2: Background image ---
-    const pictures = imageRow ? [...imageRow.querySelectorAll('picture')] : [];
+    const pictures = firstRow ? [...firstRow.querySelectorAll('picture')] : [];
 
     if (pictures.length === 0) {
-      if (imageRow) imageRow.hidden = true;
       block.classList.add('no-image');
     } else if (pictures.length === 1) {
-      imageRow.classList.add('hero-img');
+      firstRow.classList.add('hero-img');
     } else {
-      // Two images: first = light, second = dark
-      const lightPic = pictures[0].closest('div') || imageRow;
+      const lightPic = pictures[0].closest('div') || firstRow;
       const darkPic = pictures[1].closest('div');
       lightPic.classList.add('hero-img-light');
       if (darkPic) darkPic.classList.add('hero-img-dark');
       if (document.body.classList.contains('dark-scheme') && darkPic) {
-        imageRow.insertBefore(darkPic, lightPic);
+        firstRow.insertBefore(darkPic, lightPic);
       }
     }
   }
 
-  // --- Row 3: Content — tagline is the paragraph before h1 ---
-  const h1 = (contentRow || block).querySelector('h1');
+  // --- Tagline (paragraph before h1) ---
+  const h1 = block.querySelector('h1');
   if (!h1) return;
 
   const contentDiv = h1.closest('div');

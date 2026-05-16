@@ -305,22 +305,14 @@
     ]
   },
   {
-    "id": "hero",
+    "id": "hero-image",
     "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "videoUrl",
-        "label": "Video URL",
-        "description": "MP4 video URL for the hero background. Leave empty to use an image instead."
-      },
       {
         "component": "reference",
         "valueType": "string",
         "name": "image",
         "label": "Background Image",
-        "multi": false,
-        "description": "Background image. Used when Video URL is empty."
+        "multi": false
       },
       {
         "component": "text",
@@ -328,6 +320,24 @@
         "name": "imageAlt",
         "label": "Image Alt Text",
         "value": ""
+      },
+      {
+        "component": "text",
+        "name": "heading",
+        "label": "Heading",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "hero-video",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "videoUrl",
+        "label": "Video URL",
+        "description": "Direct URL to an MP4 video file"
       },
       {
         "component": "text",
