@@ -26,17 +26,6 @@
       "id": "hero",
       "fields": [
         {
-          "component": "select",
-          "name": "backgroundType",
-          "label": "Background Type",
-          "valueType": "string",
-          "description": "Choose whether to use a video or image as the hero background",
-          "options": [
-            { "name": "Image", "value": "image" },
-            { "name": "Video", "value": "video" }
-          ]
-        },
-        {
           "component": "text",
           "valueType": "string",
           "name": "videoUrl",
