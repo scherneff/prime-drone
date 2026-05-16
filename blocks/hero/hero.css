@@ -67,7 +67,7 @@
   max-height: 580px;
   height: 580px;
   object-fit: cover;
-  opacity: 0.65;
+  opacity: 0;
 }
 
 @media (width >= 900px) {
