@@ -211,9 +211,9 @@
           }
         },
         {
-          "title": "Hero (Image)",
+          "title": "Hero",
           "id": "hero",
-          "model": "hero-image",
+          "model": "hero",
           "plugins": {
             "da": {
               "name": "hero",
@@ -221,34 +221,12 @@
               "columns": 1,
               "fields": [
                 {
-                  "name": "image",
+                  "name": "background",
                   "selector": "div:nth-child(1)>div>picture>img[src]"
                 },
                 {
-                  "name": "imageAlt",
+                  "name": "backgroundAlt",
                   "selector": "div:nth-child(1)>div>picture>img[alt]"
-                },
-                {
-                  "name": "heading",
-                  "selector": "div:nth-child(2)>div>h1"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "title": "Hero (Video)",
-          "id": "hero-video",
-          "model": "hero-video",
-          "plugins": {
-            "da": {
-              "name": "hero",
-              "rows": 2,
-              "columns": 1,
-              "fields": [
-                {
-                  "name": "videoUrl",
-                  "selector": "div:nth-child(1)>div>a[href]"
                 },
                 {
                   "name": "heading",

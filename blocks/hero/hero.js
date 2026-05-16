@@ -1,16 +1,26 @@
+const MP4_RE = /\.mp4(\?|$)/i;
+
+function isVideoSrc(src) {
+  return src && MP4_RE.test(src);
+}
+
 /** @param {Element} block The hero block element */
 export default function decorate(block) {
-  const MP4_RE = /https?:\/\/\S+\.mp4\b/i;
-
-  // --- Detect background from first row ---
-  // Hero (Image): row 1 = picture, row 2 = content
-  // Hero (Video): row 1 = MP4 link or text URL, row 2 = content
   const firstRow = block.querySelector(':scope > div');
-  const videoAnchor = firstRow && [...firstRow.querySelectorAll('a')].find((a) => MP4_RE.test(a.href));
-  const videoTextEl = !videoAnchor && firstRow && [...firstRow.querySelectorAll('div, p')].find((el) => MP4_RE.test(el.textContent?.trim()));
-  const videoSrc = videoAnchor?.href || videoTextEl?.textContent?.trim().match(MP4_RE)?.[0];
+
+  // --- Detect background type from row 1 ---
+  // A reference asset renders as <picture><img src="...">; if the src is an MP4
+  // (or an MP4 link is in the cell) treat it as video, otherwise as image.
+  const picture = firstRow?.querySelector('picture');
+  const imgSrc = picture?.querySelector('img')?.src || '';
+  const anchor = firstRow && [...firstRow.querySelectorAll('a')].find((a) => isVideoSrc(a.href));
+  const textMatch = !anchor && firstRow?.textContent?.trim().match(/https?:\/\/\S+\.mp4\b/i);
+  const videoSrc = (isVideoSrc(imgSrc) ? imgSrc : null)
+    || anchor?.href
+    || textMatch?.[0];
 
   if (videoSrc) {
+    // --- Video background ---
     const video = document.createElement('video');
     video.className = 'hero-video';
     video.autoplay = true;
@@ -24,22 +34,11 @@ export default function decorate(block) {
     firstRow.classList.add('hero-video-wrap');
     firstRow.append(video);
     block.classList.add('has-video');
+  } else if (picture) {
+    // --- Image background ---
+    firstRow.classList.add('hero-img');
   } else {
-    const pictures = firstRow ? [...firstRow.querySelectorAll('picture')] : [];
-
-    if (pictures.length === 0) {
-      block.classList.add('no-image');
-    } else if (pictures.length === 1) {
-      firstRow.classList.add('hero-img');
-    } else {
-      const lightPic = pictures[0].closest('div') || firstRow;
-      const darkPic = pictures[1].closest('div');
-      lightPic.classList.add('hero-img-light');
-      if (darkPic) darkPic.classList.add('hero-img-dark');
-      if (document.body.classList.contains('dark-scheme') && darkPic) {
-        firstRow.insertBefore(darkPic, lightPic);
-      }
-    }
+    block.classList.add('no-image');
   }
 
   // --- Tagline (paragraph before h1) ---

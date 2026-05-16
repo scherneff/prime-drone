@@ -1,33 +1,17 @@
 {
   "definitions": [
     {
-      "title": "Hero (Image)",
+      "title": "Hero",
       "id": "hero",
-      "model": "hero-image",
+      "model": "hero",
       "plugins": {
         "da": {
           "name": "hero",
           "rows": 2,
           "columns": 1,
           "fields": [
-            { "name": "image", "selector": "div:nth-child(1)>div>picture>img[src]" },
-            { "name": "imageAlt", "selector": "div:nth-child(1)>div>picture>img[alt]" },
-            { "name": "heading", "selector": "div:nth-child(2)>div>h1" }
-          ]
-        }
-      }
-    },
-    {
-      "title": "Hero (Video)",
-      "id": "hero-video",
-      "model": "hero-video",
-      "plugins": {
-        "da": {
-          "name": "hero",
-          "rows": 2,
-          "columns": 1,
-          "fields": [
-            { "name": "videoUrl", "selector": "div:nth-child(1)>div>a[href]" },
+            { "name": "background", "selector": "div:nth-child(1)>div>picture>img[src]" },
+            { "name": "backgroundAlt", "selector": "div:nth-child(1)>div>picture>img[alt]" },
             { "name": "heading", "selector": "div:nth-child(2)>div>h1" }
           ]
         }
@@ -36,39 +20,22 @@
   ],
   "models": [
     {
-      "id": "hero-image",
+      "id": "hero",
       "fields": [
         {
           "component": "reference",
           "valueType": "string",
-          "name": "image",
-          "label": "Background Image",
-          "multi": false
+          "name": "background",
+          "label": "Background (Image or Video)",
+          "multi": false,
+          "description": "Select an image or MP4 video asset. The block auto-detects the type."
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "imageAlt",
-          "label": "Image Alt Text",
+          "name": "backgroundAlt",
+          "label": "Background Alt Text",
           "value": ""
-        },
-        {
-          "component": "text",
-          "name": "heading",
-          "label": "Heading",
-          "valueType": "string"
-        }
-      ]
-    },
-    {
-      "id": "hero-video",
-      "fields": [
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "videoUrl",
-          "label": "Video URL",
-          "description": "Direct URL to an MP4 video file"
         },
         {
           "component": "text",

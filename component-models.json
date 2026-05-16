@@ -305,39 +305,22 @@
     ]
   },
   {
-    "id": "hero-image",
+    "id": "hero",
     "fields": [
       {
         "component": "reference",
         "valueType": "string",
-        "name": "image",
-        "label": "Background Image",
-        "multi": false
+        "name": "background",
+        "label": "Background (Image or Video)",
+        "multi": false,
+        "description": "Select an image or MP4 video asset. The block auto-detects the type."
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "imageAlt",
-        "label": "Image Alt Text",
+        "name": "backgroundAlt",
+        "label": "Background Alt Text",
         "value": ""
-      },
-      {
-        "component": "text",
-        "name": "heading",
-        "label": "Heading",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "hero-video",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "videoUrl",
-        "label": "Video URL",
-        "description": "Direct URL to an MP4 video file"
       },
       {
         "component": "text",
