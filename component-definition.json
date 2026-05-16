@@ -221,6 +221,10 @@
               "columns": 1,
               "fields": [
                 {
+                  "name": "videoUrl",
+                  "selector": "div:nth-child(1)>div>a[href]"
+                },
+                {
                   "name": "image",
                   "selector": "div:nth-child(1)>div>picture>img[src]"
                 },
@@ -231,6 +235,14 @@
                 {
                   "name": "heading",
                   "selector": "div:nth-child(2)>div>h1"
+                },
+                {
+                  "name": "tagline",
+                  "selector": "div:nth-child(2)>div>p.hero-tagline"
+                },
+                {
+                  "name": "body",
+                  "selector": "div:nth-child(2)>div>p:not(.button-container):not(.hero-tagline)"
                 }
               ]
             }

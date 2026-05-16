@@ -10,9 +10,12 @@
           "rows": 2,
           "columns": 1,
           "fields": [
+            { "name": "videoUrl", "selector": "div:nth-child(1)>div>a[href]" },
             { "name": "image", "selector": "div:nth-child(1)>div>picture>img[src]" },
             { "name": "imageAlt", "selector": "div:nth-child(1)>div>picture>img[alt]" },
-            { "name": "heading", "selector": "div:nth-child(2)>div>h1" }
+            { "name": "heading", "selector": "div:nth-child(2)>div>h1" },
+            { "name": "tagline", "selector": "div:nth-child(2)>div>p.hero-tagline" },
+            { "name": "body", "selector": "div:nth-child(2)>div>p:not(.button-container):not(.hero-tagline)" }
           ]
         }
       }
@@ -23,23 +26,55 @@
       "id": "hero",
       "fields": [
         {
+          "component": "select",
+          "name": "backgroundType",
+          "label": "Background Type",
+          "valueType": "string",
+          "description": "Choose whether to use a video or image as the hero background",
+          "options": [
+            { "name": "Image", "value": "image" },
+            { "name": "Video", "value": "video" }
+          ]
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "videoUrl",
+          "label": "Video URL",
+          "description": "Direct URL to an MP4 video file. Used when Background Type is set to Video."
+        },
+        {
           "component": "reference",
           "valueType": "string",
           "name": "image",
-          "label": "Image",
-          "multi": false
+          "label": "Background Image",
+          "multi": false,
+          "description": "Background image. Used when Background Type is set to Image."
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "imageAlt",
-          "label": "Alt Text",
+          "label": "Image Alt Text",
           "value": ""
+        },
+        {
+          "component": "text",
+          "name": "tagline",
+          "label": "Tagline",
+          "valueType": "string",
+          "description": "Short label shown above the heading (e.g. 'Prime Air')"
         },
         {
           "component": "text",
           "name": "heading",
           "label": "Heading",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "name": "body",
+          "label": "Body Text",
           "valueType": "string"
         }
       ]
