@@ -23,8 +23,8 @@
   line-height: 0;
 }
 
-/* Gradient fade effect at the bottom of the hero image */
-.hero > div:first-child::after {
+/* Gradient fade effect at the bottom of the hero image (not on video) */
+.hero:not(.has-video) > div:first-child::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -199,8 +199,8 @@
 }
 
 /* Dark mode cinematic fade uses obsidian */
-.dark-scheme .hero > div:first-child::after,
-:root[data-theme='dark'] .hero > div:first-child::after {
+.dark-scheme .hero:not(.has-video) > div:first-child::after,
+:root[data-theme='dark'] .hero:not(.has-video) > div:first-child::after {
   background: linear-gradient(to bottom, transparent 0%, var(--color-obsidian) 100%);
 }
 
