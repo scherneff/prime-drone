@@ -217,12 +217,24 @@
           "plugins": {
             "da": {
               "name": "hero",
-              "rows": 2,
+              "rows": 3,
               "columns": 1,
               "fields": [
                 {
+                  "name": "videoUrl",
+                  "selector": "div:nth-child(1)>div"
+                },
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(2)>div>picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(2)>div>picture>img[alt]"
+                },
+                {
                   "name": "heading",
-                  "selector": "div:nth-child(2)>div>h1"
+                  "selector": "div:nth-child(3)>div>h1"
                 }
               ]
             }

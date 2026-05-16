@@ -309,6 +309,28 @@
     "fields": [
       {
         "component": "text",
+        "valueType": "string",
+        "name": "videoUrl",
+        "label": "Video URL",
+        "description": "MP4 video URL for the hero background. Leave empty to use an image instead."
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Background Image",
+        "multi": false,
+        "description": "Background image. Used when Video URL is empty."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      },
+      {
+        "component": "text",
         "name": "heading",
         "label": "Heading",
         "valueType": "string"
