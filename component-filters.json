@@ -48,6 +48,12 @@
     ]
   },
   {
+    "id": "faq",
+    "components": [
+      "faq-item"
+    ]
+  },
+  {
     "id": "journey-map",
     "components": [
       "journey-map-step"

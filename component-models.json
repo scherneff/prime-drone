@@ -254,6 +254,27 @@
     ]
   },
   {
+    "id": "faq",
+    "fields": []
+  },
+  {
+    "id": "faq-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "question",
+        "label": "Question"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "answer",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
     "id": "form",
     "fields": [
       {

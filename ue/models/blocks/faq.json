@@ -1,0 +1,62 @@
+{
+  "definitions": [
+    {
+      "title": "FAQ",
+      "id": "faq",
+      "model": "faq",
+      "filter": "faq",
+      "plugins": {
+        "da": {
+          "name": "faq",
+          "rows": 1,
+          "columns": 2
+        }
+      }
+    },
+    {
+      "title": "FAQ Item",
+      "id": "faq-item",
+      "model": "faq-item",
+      "plugins": {
+        "da": {
+          "name": "faq-item",
+          "rows": 1,
+          "columns": 2,
+          "fields": [
+            { "name": "question", "selector": "div:nth-child(1)" },
+            { "name": "answer", "selector": "div:nth-child(2)" }
+          ]
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "faq",
+      "fields": []
+    },
+    {
+      "id": "faq-item",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "question",
+          "label": "Question"
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "faq",
+      "components": ["faq-item"]
+    }
+  ]
+}
