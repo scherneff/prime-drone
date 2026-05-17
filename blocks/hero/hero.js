@@ -12,25 +12,26 @@ function dmVideoUrl(src) {
   return match ? `${match[1]}/original/as/hero.mp4` : null;
 }
 
+function resolveVideoSrc(src) {
+  if (!src) return null;
+  if (DM_OPENAPI_RE.test(src) && !IMAGE_RE.test(src)) return dmVideoUrl(src);
+  if (isVideoSrc(src)) return src;
+  return null;
+}
+
 /** @param {Element} block The hero block element */
 export default function decorate(block) {
   const firstRow = block.querySelector(':scope > div');
 
-  // --- Detect background type from row 1 ---
-  // Reference assets render as <picture><img src="...">.
-  // If the src is a DM Open API URL and not an image format → rewrite to MP4.
-  // If the src already ends in .mp4, or there's an MP4 link/text, use as video.
   const picture = firstRow?.querySelector('picture');
   const imgSrc = picture?.querySelector('img')?.src || '';
-  const anchor = firstRow && [...firstRow.querySelectorAll('a')].find((a) => isVideoSrc(a.href));
+  const anchor = firstRow && [...firstRow.querySelectorAll('a')].find(
+    (a) => isVideoSrc(a.href) || DM_OPENAPI_RE.test(a.href),
+  );
   const textMatch = !anchor && firstRow?.textContent?.trim().match(/https?:\/\/\S+\.mp4\b/i);
 
-  const isDMAsset = DM_OPENAPI_RE.test(imgSrc);
-  const isDMVideo = isDMAsset && !IMAGE_RE.test(imgSrc);
-
-  const videoSrc = (isDMVideo ? dmVideoUrl(imgSrc) : null)
-    || (isVideoSrc(imgSrc) ? imgSrc : null)
-    || anchor?.href
+  const videoSrc = resolveVideoSrc(imgSrc)
+    || (anchor && resolveVideoSrc(anchor.href))
     || textMatch?.[0];
 
   if (videoSrc) {
