@@ -59,11 +59,15 @@ export default function decorate(block) {
   [...block.children].forEach(decorateRow);
 
   const blockObs = new MutationObserver((mutations) => {
+    const rowsToDecorate = new Set();
     mutations.forEach(({ addedNodes }) => {
       addedNodes.forEach((node) => {
-        if (node.nodeType === Node.ELEMENT_NODE) decorateRow(node);
+        if (node.nodeType !== Node.ELEMENT_NODE) return;
+        if (node.parentElement === block) rowsToDecorate.add(node);
+        else if (node.parentElement?.parentElement === block) rowsToDecorate.add(node.parentElement);
       });
     });
+    rowsToDecorate.forEach(decorateRow);
   });
-  blockObs.observe(block, { childList: true });
+  blockObs.observe(block, { childList: true, subtree: true });
 }
