@@ -264,13 +264,15 @@
         "component": "text",
         "valueType": "string",
         "name": "question",
-        "label": "Question"
+        "label": "Question",
+        "value": "Add new question"
       },
       {
         "component": "richtext",
         "valueType": "string",
         "name": "answer",
-        "label": "Answer"
+        "label": "Answer",
+        "value": "Add new answer"
       }
     ]
   },
