@@ -66,8 +66,9 @@ main .faq .faq-answer {
 main .faq .faq-answer p {
   font-family: var(--font-family-serif);
   font-size: var(--body-font-size-m);
+  font-weight: 700;
   line-height: 1.65;
-  color: inherit;
+  color: var(--color-gold);
   margin: 0;
 }
 

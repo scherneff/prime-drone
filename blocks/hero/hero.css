@@ -23,20 +23,6 @@
   line-height: 0;
 }
 
-/* Gradient fade effect at the bottom of the hero image (not on video) */
-.hero:not(.has-video) > div:first-child::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 65%;
-  background: linear-gradient(to bottom, transparent 0%, light-dark(var(--color-parchment), var(--color-obsidian)) 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-
 /* Dual-image hero: light shown by default, dark hidden */
 .hero .hero-img-dark {
   display: none;
@@ -196,12 +182,6 @@
 :root[data-theme='dark'] .hero .hero-img-dark picture img {
   opacity: 0.3;
   mask-image: radial-gradient(ellipse 85% 70% at 50% 35%, black 25%, transparent 100%);
-}
-
-/* Dark mode cinematic fade uses obsidian */
-.dark-scheme .hero:not(.has-video) > div:first-child::after,
-:root[data-theme='dark'] .hero:not(.has-video) > div:first-child::after {
-  background: linear-gradient(to bottom, transparent 0%, var(--color-obsidian) 100%);
 }
 
 /* Tablet: show body text */
