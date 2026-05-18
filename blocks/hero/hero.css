@@ -44,7 +44,8 @@
   width: 100%;
   max-height: 580px;
   object-fit: cover;
-  opacity: 0.55;
+
+  /* opacity: 0.55; */
 }
 
 /* Video background */
